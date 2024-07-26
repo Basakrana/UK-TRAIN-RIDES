@@ -35,3 +35,17 @@ select routes ,
 	from NEW_D
 	GROUP BY routes
 	order by ranking desc
+
+## Q2 What are the peak travel times?
+
+with nt as (
+	select extract(hour from (departure_time)) as d_t
+	from tr
+)
+	select d_t,
+rank() over(order by count(d_t)) as ranking
+from nt
+group by d_t
+order by ranking desc
+
+## Q3 How does revenue vary by ticket type and class?
