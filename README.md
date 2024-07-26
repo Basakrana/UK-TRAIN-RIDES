@@ -49,3 +49,20 @@ group by d_t
 order by ranking desc
 
 ## Q3 How does revenue vary by ticket type and class?
+
+select ticket_class,ticket_type , sum(price) as revenue
+from tr
+group by ticket_class,ticket_type
+order by revenue desc
+
+##Q4 What is the on time performance? What are the main contribuiting factors
+
+SELECT journey_status,count(journey_status) as total 
+from tr
+group by journey_status
+order by total desc
+
+select reason_for_delay, count(reason_for_delay) as number_of_delay
+from tr
+group by reason_for_delay
+order by number_of_delay desc
