@@ -25,3 +25,13 @@ CREATE TABLE tr(
 
 ## Q1 What are the most popoular routes?
 
+WITH NEW_D AS (
+	SELECT transaction_id,CONCAT(departure_station,' to ',arrival_destination) as routes
+	FROM tr)
+
+select routes ,
+	rank () over (order by count(routes)) as ranking ,
+	count(transaction_id)
+	from NEW_D
+	GROUP BY routes
+	order by ranking desc
