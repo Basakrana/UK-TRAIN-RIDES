@@ -22,3 +22,6 @@ CREATE TABLE tr(
 	Reason_for_Delay TEXT,
 	Refund_Request TEXT
 )
+
+## Q1 What are the most popoular routes?
+
