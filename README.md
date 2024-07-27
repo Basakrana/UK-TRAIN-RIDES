@@ -2,7 +2,7 @@
 
 ### create tables in postgre sql
 
-CREATE TABLE tr(
+CREATE TABLE t_data(
 	Transaction_ID VARCHAR,
     Date_of_Purchase DATE,
 	Time_of_Purchase TIME,
@@ -27,7 +27,7 @@ CREATE TABLE tr(
 
 WITH NEW_D AS (
 	SELECT transaction_id,CONCAT(departure_station,' to ',arrival_destination) as routes
-	FROM tr)
+	FROM t_data)
 
 select routes ,
 	rank () over (order by count(routes)) as ranking ,
@@ -40,7 +40,7 @@ select routes ,
 
 with nt as (
 	select extract(hour from (departure_time)) as d_t
-	from tr
+	from t_data
 )
 	select d_t,
 rank() over(order by count(d_t)) as ranking
@@ -51,20 +51,20 @@ order by ranking desc
 ## Q3 How does revenue vary by ticket type and class?
 
 select ticket_class,ticket_type , sum(price) as revenue
-from tr
+from t_data
 group by ticket_class,ticket_type
 order by revenue desc
 
 ## Q4 What is the on time performance? What are the main contribuiting factors
 
 SELECT journey_status,count(journey_status) as total 
-from tr
+from t_data
 group by journey_status
 order by total desc
 
 ## Q5 What are the main contribuiting factors?
 
 select reason_for_delay, count(reason_for_delay) as number_of_delay
-from tr
+from t_data
 group by reason_for_delay
 order by number_of_delay desc
