@@ -53,7 +53,7 @@ from t_data
 group by ticket_class,ticket_type
 order by revenue desc
 
-## Q4 What is the on time performance? What are the main contribuiting factors
+## Q4 What is the on time performance?
 
 SELECT journey_status,count(journey_status) as total 
 from t_data
